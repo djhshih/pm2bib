@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Author:  David JH Shih <djh.shih@gmail.com>
+# Author:  David J. H. Shih <djh.shih@gmail.com>
 # License: GPLv3
 # Date:    2012-04-14
 # Version: 0.1
