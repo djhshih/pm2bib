@@ -122,7 +122,7 @@ def query_pubmed(url, query):
 
 def main():
 
-	pr = argparse.ArgumentParser(description='Converts pubmed ID to Bibtex reference')
+	pr = argparse.ArgumentParser(description='Converts Pubmed ID to BibTex entry')
 	pr.add_argument('query', help='Pubmed query, default: Pubmed accession number (PMID)')
 	pr.add_argument('-f', '--file', dest='file', action='store_const', const=True, default=False, help='query is an input text file of queries')
 	pr.add_argument('--url', help='Pubmed URL', default='http://www.ncbi.nlm.nih.gov/pubmed')
