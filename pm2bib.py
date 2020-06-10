@@ -2,8 +2,8 @@
 
 # Author:  David J. H. Shih <djh.shih@gmail.com>
 # License: GPLv3
-# Date:    2012-04-14
-# Version: 0.1
+# Date:    2020-06-10
+# Version: 0.2
 
 import os, argparse, os.path, re
 import urllib.request as request, urllib.parse as parse
@@ -40,8 +40,8 @@ def medline2bib(medline):
         if line:
             if line[0] != ' ':
                 # first character is not a space: start a new item
-                items.append(item)
-                item = line
+                items.append(item.rstrip())
+                item = line.rstrip()
             else:
                 # the current line is a continuation of the last item
                 item += ' ' + line.lstrip()
@@ -95,7 +95,7 @@ def medline2bib(medline):
 
 def query_pubmed(url, query):
 
-    params = parse.urlencode( {'term': query, 'report': 'medline'} )
+    params = parse.urlencode( {'id': query, 'format': 'medline'} )
     base_url = '{}?%s'.format(url)
     f = request.urlopen(base_url % params)
     data = f.read().decode('utf-8')
@@ -125,7 +125,7 @@ def main():
     pr = argparse.ArgumentParser(description='Converts Pubmed ID to BibTex entry')
     pr.add_argument('query', help='Pubmed query, default: Pubmed accession number (PMID)')
     pr.add_argument('-f', '--file', dest='file', action='store_const', const=True, default=False, help='query is an input text file of queries')
-    pr.add_argument('--url', help='Pubmed URL', default='http://www.ncbi.nlm.nih.gov/pubmed')
+    pr.add_argument('--url', help='Pubmed URL', default='https://api.ncbi.nlm.nih.gov/lit/ctxp/v1/pubmed/')
 
     argv = pr.parse_args()
 
